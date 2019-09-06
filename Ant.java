@@ -7,9 +7,12 @@ import java.awt.Color;
 public class Ant {
 	private int x, y;
 	private int dir;
+	private int height, width;
 	
 	public Ant(int height, int width) {
 		this.dir = 0;
+		this.width = width;
+		this.height = height;
 		this.x = Math.floorDiv(width, 2);
 		this.y = Math.floorDiv(height, 2);
 	}
@@ -23,15 +26,23 @@ public class Ant {
 		switch(dir) {
 			case 0: 
 				y--;
+				if (y < 0)
+					setCenter(width, height);
 				break;
 			case 1: 
 				x++;
+				if (x > width - 1)
+					setCenter(width, height);
 				break;
 			case 2:
 				y++;
+				if (y > height - 1)
+					setCenter(width, height);
 				break;
 			case 3:
 				x--;
+				if (x < 0)
+					setCenter(width, height);
 				break;
 		}
 	}
@@ -46,6 +57,11 @@ public class Ant {
 	
 	public int getY() {
 		return y;
+	}
+	
+	public void setCenter(int width, int height) {
+		this.x = Math.floorDiv(width, 2);
+		this.y = Math.floorDiv(height, 2);
 	}
 	
 	public int getDirection() {
